@@ -18,6 +18,9 @@
 
   <link rel="icon" type="image/svg+xml" href="./assets/img/favicon.svg">
 
+  <!-- SWIPER CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+
   <!-- CSS Principal da página -->
   <link rel="stylesheet" href="./assets/css/style.css">
 
@@ -31,7 +34,7 @@
     <div class="menu-content">
     
       <!-- Título do Cabeçalho -->
-      <a href="index.html" id="titulo">Portfólio</a>
+      <a href="index.html" id="titulo">ABC</a>
 
       <!-- Menu de Navegação -->
       <nav>
@@ -54,7 +57,7 @@
       
       <!-- Boas Vindas -->
       <article class="hero-content">
-        <span>👋 Olá, eu sou a Ana Beatriz</span>
+        <span>Olá, eu sou a Ana Beatriz</span>
         <h1>Desenvolvedora Full Stack</h1>
         <p>Transformo ideias em, 
            código e crio experiências digitais incríveis.</p>
@@ -66,67 +69,19 @@
       </article>
 
       <!-- Imagem da Seção Hero -->
-      <figure class="hero-image">
+      <!-- <figure class="hero-image"> 
         <img src="https://ik.imagekit.io/o02kjfcyy/Adobe%20Express%20-%20file.jpg"
              alt="Foto do autor do site"
              class="float-animation"
         >
-      </figure>
+      </figure>-->
     </section>
      
     
     <!-- Seção About -->
     <section id="about" class="section-container about-container">
 
-      <!-- Imagem da Seção About -->
-      <figure class="about-image">
-        <img src="./assets/img/avatar_dev_man.svg"
-             alt="Foto do perfil do autor"
-        >
-      </figure>
-
-      <!-- Conteúdo da Seção About -->
-      <article class="about-content">
-
-        <h2>Sobre mim</h2>
-        <p>Desenvolvedora Full Stack em formação, com foco em aplicações web usando JavaScript,
-           TypeScript, Node.js, NestJS, React e MySQL.
-           Tenho experiência prática no desenvolvimento de APIs, integração de sistemas, 
-           banco de dados e testes automatizados, seguindo boas práticas como POO, SOLID e Clean Code. 
-           Possuo familiaridade com Git, GitHub e metodologias ágeis.</p>
-
-        <p>Atualmente curso Engenharia de Software e participo do bootcamp Generation Brasil. 
-          Busco uma oportunidade de estágio para evoluir rapidamente e contribuir com soluções eficientes.</p>
-
-        <!-- Links (GitHub + Curriculo) e Dados do GitHub -->
-        <div class="about-buttons-data">
-
-          <!-- Links -->
-          <div class="buttons-container">
-            <a href="#" target="_blank" class="botao">GitHub</a>
-            <a href="#" target="_blank" class="botao-outline">Currículo</a>
-          </div>
-
-          <!-- Dados - GitHub -->
-          <div class="data-container">
-
-            <!-- Nº de Seguidores -->
-            <div class="data-item">
-              <span class="data-number">100</span>
-              <span class="data-label">Seguidores</span>
-            </div>
-
-            <!-- Nº de Repositórios Públicos -->
-            <div class="data-item">
-              <span class="data-number">10</span>
-              <span class="data-label">Repositórios</span>
-            </div>
-
-          </div>
-
-        </div>
-      </article>
-      
+     
     </section>
     
     <!-- Seção Projects -->
@@ -138,43 +93,6 @@
       <div class="swiper projects-swiper">
         <div class="swiper-wrapper">
 
-          <figure class="swiper-slide">
-
-            <article class="project-card">
-
-              <!-- Ícone da Tecnologia padrão do projeto -->
-              <figure class="project-image">
-                <img src="./assets/icons/languages/github.svg"
-                     alt="Ícone do GitHub"
-                >
-              </figure>
-
-              <!-- Conteúdo do Projeto -->
-              <div class="project-content">
-
-                <h3>Projeto GitHub</h3>
-                <p>Projeto desenvolvido no GitHub</p>
-
-                <!-- Tags do Projeto -->
-                <div class="project-tags">
-                  <span class="tag">GitHub</span>
-                </div>
-
-                <!-- Links do Projeto -->
-                <div class="project-buttons">
-                  <a href="#" target="_blank" class="botao botao-sm">
-                    GitHub
-                  </a>
-                  <a href="#" target="_blank" class="botao-outline botao-sm">
-                    Deploy
-                  </a>
-                </div>
-
-              </div>
-
-            </article>
-
-          </div>
 
         </div>
 
@@ -222,7 +140,10 @@
       </article>
 
       <!-- Formulário de Contato -->
-      <form id="formulario">
+      <form id="formulario" action="https://formsubmit.co/f51146f3bafad2707c1be3890d7255c1" method="POST">
+
+        <input type="hidden" name="_next" value="http://localhost:5500/success.html">
+        <input type="hidden" name="_captcha" value="false">
 
         <label for="nome">Nome</label>
         <input id="nome" name="nome" type="text" placeholder="Digite o seu nome completo">
@@ -252,5 +173,11 @@
   <footer>
     Desenvolvido por Ana Beatriz Carvalho - 2026
   </footer>
+
+  <!-- SWIPER JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+  <!-- Script JavaScript Principal da página -->
+  <script src="./assets/js/script.js"></script>
 </body>
 </html>
