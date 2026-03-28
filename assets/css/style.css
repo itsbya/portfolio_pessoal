@@ -528,7 +528,7 @@ text-align: center;
 .tag {
   padding: 0.375rem 0.75rem;
   border-radius: var(--radius-sm);
-  background-color: var(--white-50);
+  /*background-color: var(--white-50);*/
   font-size: var(--text-sm);
   font-weight: 600;
   color: #7c3aed;
@@ -689,7 +689,6 @@ form span {
 
 footer {
     padding: 2.5rem;
-    /*background: linear-gradient(to right, var(--pink-200), var(--pink-300));*/
     font-weight: 600;
     text-align: center;
     color: var(--white);
@@ -726,7 +725,7 @@ footer {
 
 .success-content h2 {
     font-size: var(--text-lg);
-    color: var(--gray-400);
+    color: var(--white-50);
 }
 
 .success-icon {
@@ -736,16 +735,14 @@ footer {
     width: 7.5rem;
     height: 7.5rem;
     border-radius: var(--radius-full);
-    background-color: var(--white-50);
     
 }
 
 .success-icon img {
     width: 6rem;
     height: 6rem;
-    filter: brightness(0) saturate(100%) invert(73%) sepia(57%) saturate(3933%) hue-rotate(283deg) brightness(92%) contrast(93%);
+    filter: brightness(0) saturate(100%) invert(23%) sepia(82%) saturate(3176%) hue-rotate(254deg) brightness(94%) contrast(97%);
 }
-
 
 
     /* Responsividade - Tablet */
@@ -855,7 +852,7 @@ footer {
 
 
 
-/* Responsividade - Celular 
+ Responsividade - Celular 
 
 @media screen and (max-width: 480px) {
     .section-container{
@@ -982,8 +979,6 @@ form {
     form button {
         width: 100%;
     }
-
 }
-*/
 
 
