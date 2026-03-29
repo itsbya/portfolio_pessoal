@@ -42,14 +42,15 @@ async function getAboutGitHub() {
       <article class="about-content">
 
         <h2>Sobre mim</h2>
-        <p>Desenvolvedora Full Stack, com foco em aplicações web usando JavaScript,
-           TypeScript, Node.js, NestJS, React e MySQL.
-           Tenho experiência prática no desenvolvimento de APIs, integração de sistemas, 
-           banco de dados e testes automatizados, seguindo boas práticas como POO, SOLID e Clean Code. 
-           Possuo familiaridade com Git, GitHub e metodologias ágeis.</p>
+        <p><span style="color: #3EC6D3;">DESENVOLVEDORA FULL STACK </span> com foco em aplicações web modernas e escaláveis. 
+        Experiência prática com <span style="color: #3EC6D3;">JAVASCRIPT </span>, <span style="color: #3EC6D3;"> TYPESCRIPT </span>,
+        <span style="color: #3EC6D3;"> NODE.JS </span>, <span style="color: #3EC6D3;"> NESTJS </span>, <span style="color: #3EC6D3;"> 
+        REACT </span> e <span style="color: #3EC6D3;"> MYSQL </span>, desenvolvendo APIs e aplicando boas práticas como SOLID e Clean Code.</p>
 
-        <p>Atualmente curso Engenharia de Software e participo do bootcamp Generation Brasil. 
-          Busco uma oportunidade de estágio para evoluir rapidamente e contribuir com soluções eficientes.</p>
+        <p>Em formação em Engenharia de Software e pela Generation Brasil, busco uma oportunidade de <span style="color: #3EC6D3;"> ESTÁGIO </span> 
+        para crescer rapidamente e gerar impacto real.</p>
+
+
 
         <!-- Links (GitHub + Curriculo) e Dados do GitHub -->
         <div class="about-buttons-data">
@@ -57,7 +58,7 @@ async function getAboutGitHub() {
           <!-- Links -->
           <div class="buttons-container">
             <a href="${perfil.html_url}" target="_blank" class="botao">GitHub</a>
-            <a href="https://drive.google.com/file/d/1D4mEW11e6Dd0K_8nPQII7W-egAFoh_8i/view?usp=sharing" target="_blank" class="botao-outline">Currículo</a>
+            <a href="${"https://drive.google.com/file/d/1CPqjXyPpQRhi2z3nw2AUQF9sYKmwz53d/view?usp=sharing"} target="_blank" class="botao-outline">Currículo</a>
           </div>
 
           <!-- Dados - GitHub -->
