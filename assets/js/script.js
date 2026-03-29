@@ -43,9 +43,9 @@ async function getAboutGitHub() {
 
         <h2>Sobre mim</h2>
         <p><span style="color: #3EC6D3;">DESENVOLVEDORA FULL STACK </span> com foco em aplicações web modernas e escaláveis. 
-        Experiência prática com <span style="color: #3EC6D3;">JAVASCRIPT </span>, <span style="color: #3EC6D3;"> TYPESCRIPT </span>,
-        <span style="color: #3EC6D3;"> NODE.JS </span>, <span style="color: #3EC6D3;"> NESTJS </span>, <span style="color: #3EC6D3;"> 
-        REACT </span> e <span style="color: #3EC6D3;"> MYSQL </span>, desenvolvendo APIs e aplicando boas práticas como SOLID e Clean Code.</p>
+        Tenho experiência prática com <span style="color: #3EC6D3;">JavaScript</span>, <span style="color: #3EC6D3;"> TypeScript</span>,
+        <span style="color: #3EC6D3;"> Node.js</span>, <span style="color: #3EC6D3;"> Nest.JS</span>, <span style="color: #3EC6D3;"> 
+         React</span> e <span style="color: #3EC6D3;"> MySQL</span>, desenvolvendo APIs e aplicando boas práticas como SOLID e Clean Code.</p>
 
         <p>Em formação em Engenharia de Software e pela Generation Brasil, busco uma oportunidade de <span style="color: #3EC6D3;"> ESTÁGIO </span> 
         para crescer rapidamente e gerar impacto real.</p>
