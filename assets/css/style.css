@@ -246,7 +246,7 @@ header {
 
 
 header a {
-    font-weight: 600;
+    font-weight: 550;
     color: var(--white);
     transition: color 0.3s ease;
 }
@@ -312,24 +312,24 @@ header a:hover {
 
 .hero-content span {
     font-size: var(--text-xl);
-    font-weight: 700;
+    font-weight: 550;
 }
 
 
 .hero-content h1 {
     text-align: center;
-    font-size: 5rem;
+    font-size: 4.5rem;
     background: linear-gradient(90deg, var(--lightPurple), var(--lightGreen));
     background-clip: text;
     color: transparent;
-    font-weight: 700;
+    font-weight: 550;
     line-height: 1.1;
 
 }
 
 .hero-content h1:hover {
     color: transparent;
-    background: linear-gradient(90deg, #3EC6D3, #6A4CFF);
+    background: linear-gradient(90deg, var(--lightGreen), var(--lightPurple));
     background-clip: text;
 }
 
@@ -416,8 +416,8 @@ header a:hover {
 .about-content h2,
 .projects-container h2 {
     margin-bottom: var(--spacing-md);
-    font-size: var(--text-3xl);
-    font-weight: 700;
+    font-size: var(--text-2xl);
+    font-weight: 550;
     color: var(--lightGreen);
 }
 
@@ -452,7 +452,7 @@ header a:hover {
 
 .data-number {
     font-size: var(--text-xl);
-    font-weight: 700;
+    font-weight: 550;
     text-align: center;
     color: var(--lightGreen);
 }
@@ -462,6 +462,30 @@ header a:hover {
     text-align: center;
     color: var(--white);
 }
+
+
+
+/* Skills 
+
+.skills-container {
+    display: column;
+    align-items: center;
+    gap: var(--spacing-2xl);
+    margin: var(--spacing-2xl) auto;
+    padding-left: var(--spacing-lg);
+    padding-right: var(--spacing-lg);
+    border-radius: var(--radius-lg);
+}
+
+
+.skills-container h2 {
+    margin-bottom: var(--spacing-md);
+    font-size: var(--text-2xl);
+    font-weight: 550;
+    color: var(--lightGreen);
+    text-align: center;
+}
+*/
 
 /* Projects */
 
@@ -617,7 +641,7 @@ header a:hover {
     color: var(--lightGreen);
     margin-bottom: var(--spacing-md);
     font-size: var(--text-3xl);
-    font-weight: 700;
+    font-weight: 550;
 }
 
 
