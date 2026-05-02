@@ -1,76 +1,92 @@
-<!doctype html>
-<html lang="en">
-  <head>
-
-      <!-- Fontes do Google -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
- 
-    <!-- Fonte do Google - Poppins -->
-<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
-
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="author" content="Ana Beatriz" />
-    <meta
-      name="description"
-      content="Portfólio de Ana Beatriz Carvalho,
-                     desenvolvedora Full Stack especializada em criar experiências                 
-                     digitais incríveis. Conheça meus projetos e entre em contato."
-    />
-
-    <meta name="robots" content="index, follow" />
-
-    <link rel="icon" type="image/svg+xml" href="./assets/img/favicon.svg" />
-
-     <!-- CSS Principal da página -->
-  <link rel="stylesheet" href="./assets/css/style.css">
-
-    <title>Portfolio de Ana Beatriz</title>
-  </head>
-  <body>
-
-    <!-- Cabeçalho da Página (header) -->
-     <header class="menu-container">
-        <div class="menu-content">
-            <a href="index.html" id="titulo">[ABDEV]</a>
-
-            <nav>
-                <ul class="menu-list">
-                    <li><a href="index.html#hero">Início</a></li>
-                    <li><a href="index.html#about">Sobre</a></li>
-                     <!--<li><a href="index.html#skills">Skills</a></li>-->
-                    <li><a href="index.html#projects">Projetos</a></li>
-                    <li><a href="index.html#contact">Contato</a></li>
-                </ul>
-            </nav>
-        </div>
-     </header>
-
-     <!-- Seção Principal da Página (main) -->
-     <main>
-
-        <!-- Mensagem de Sucesso -->
-         <section class="success-container">
-            <article class="success-content">
-
-                <figure class="success-icon">
-                    <img src="./assets/img/success.svg"
-                    alt="Ilustração de sucesso"
-                    class="float-animation" width="20%">
-                </figure>
-
-                <h1>E-mail enviado com Sucesso!</h1>
-                <h2>Obrigado por entrar em contato! <br> Logo mais retornarei sua mensagem</h2>
-
-                <a class="botao" href="index.html">Voltar para o Início</a>
-            </article>
-         </section>
-     </main>
-
-     <!-- Rodapé da Página (footer) -->
-      <footer>
-        <p>Desenvolvido por Ana Beatriz Carvalho - 2026</p>
-      </footer>
-  </body>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, follow" />
+  <title>Sucesso | Ana Beatriz</title>
+  
+  <link rel="icon" type="image/svg+xml" href="./assets/img/favicon.svg" />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  
+  <script src="./js/theme.js"></script>
+  
+  <link rel="stylesheet" href="./css/variables.css" />
+  <link rel="stylesheet" href="./css/reset.css" />
+  <link rel="stylesheet" href="./css/style.css" />
+  
+  <style>
+    .success-page {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: var(--space-xl);
+    }
+    
+    .success-content {
+      max-width: 500px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-md);
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeUp 0.8s ease-out forwards;
+    }
+    
+    .success-icon-wrapper {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: var(--accent-glow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-primary);
+      margin-bottom: var(--space-sm);
+    }
+    
+    .success-icon-wrapper svg {
+      width: 40px;
+      height: 40px;
+    }
+    
+    /* SVG Draw Animation */
+    .success-icon-wrapper svg path {
+      stroke-dasharray: 50;
+      stroke-dashoffset: 50;
+      animation: drawCheck 0.6s ease-out 0.4s forwards;
+    }
+    
+    @keyframes drawCheck {
+      to { stroke-dashoffset: 0; }
+    }
+    
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <!-- Mantém o toggle de tema escondido ou o botão de voltar no canto? O design limpo centralizado é melhor -->
+  
+  <main class="success-page">
+    <div class="success-content">
+      <div class="success-icon-wrapper">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 6L9 17l-5-5" />
+        </svg>
+      </div>
+      <h1 class="hero__title" style="font-size: var(--text-3xl);">Mensagem Enviada!</h1>
+      <p class="hero__subtitle" style="margin-bottom: var(--space-lg);">Obrigada por entrar em contato. Retornarei o mais breve possível!</p>
+      
+      <a href="index.html" class="btn btn--primary">Voltar para o Início</a>
+    </div>
+  </main>
+</body>
 </html>
