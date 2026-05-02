@@ -71,46 +71,78 @@ async function fetchProjectsData() {
     const repos = await response.json();
     projectsGrid.innerHTML = ''; // Limpa o loading
 
-    // Lista de ícones para tecnologias (usando SVG simples inline ou icones do devicon no HTML)
-    // Para simplificar no Vanilla sem dependencias complexas, usamos as letras iniciais
-    
+    // Agrupar repositórios por linguagem
+    const reposByLang = {};
     repos.forEach(repo => {
-      const language = repo.language || 'GitHub';
-      const initial = language.substring(0, 2).toUpperCase();
+      // Se não tiver linguagem, agrupa em 'Outros'
+      const language = repo.language || 'Outros';
+      if (!reposByLang[language]) reposByLang[language] = [];
+      reposByLang[language].push(repo);
+    });
+
+    // Renderizar categorias e seus carrosséis
+    Object.keys(reposByLang).forEach(lang => {
+      const langRepos = reposByLang[lang];
       
-      const desc = repo.description 
-        ? (repo.description.length > 100 ? repo.description.substring(0, 97) + '...' : repo.description)
-        : 'Projeto desenvolvido no GitHub. Acesse o código para mais detalhes.';
+      const categoryHTML = `
+        <div class="projects-category reveal" data-language="${lang}">
+          <h3 class="projects-category__title">Projetos em ${lang}</h3>
+          
+          <div class="carousel-wrapper">
+            <button class="carousel-btn carousel-btn--prev" aria-label="Anterior">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+            </button>
+            
+            <div class="carousel-track">
+              ${langRepos.map(repo => {
+                const initial = lang.substring(0, 2).toUpperCase();
+                const desc = repo.description 
+                  ? (repo.description.length > 100 ? repo.description.substring(0, 97) + '...' : repo.description)
+                  : 'Projeto desenvolvido no GitHub. Acesse o código para mais detalhes.';
 
-      const topicsHTML = repo.topics && repo.topics.length > 0 
-        ? repo.topics.slice(0,3).map(t => `<span class="tag">${t}</span>`).join('')
-        : `<span class="tag">${language}</span>`;
+                const topicsHTML = repo.topics && repo.topics.length > 0 
+                  ? repo.topics.slice(0,3).map(t => `<span class="tag">${t}</span>`).join('')
+                  : `<span class="tag">${lang}</span>`;
 
-      const hasDeploy = repo.homepage ? `<a href="${repo.homepage}" target="_blank" class="project-card__link">Deploy ↗</a>` : '';
+                const hasDeploy = repo.homepage ? `<a href="${repo.homepage}" target="_blank" class="project-card__link">Deploy ↗</a>` : '';
 
-      const cardHTML = `
-        <article class="project-card reveal" data-language="${language}" style="transition: opacity 0.3s ease;">
-          <div class="project-card__header">
-            <div class="project-card__icon">${initial}</div>
-            <div class="project-card__links">
-              ${hasDeploy}
-              <a href="${repo.html_url}" target="_blank" class="project-card__link">Code ↗</a>
+                return `
+                  <article class="project-card">
+                    <div class="project-card__header">
+                      <div class="project-card__icon">${initial}</div>
+                      <div class="project-card__links">
+                        ${hasDeploy}
+                        <a href="${repo.html_url}" target="_blank" class="project-card__link">Code ↗</a>
+                      </div>
+                    </div>
+                    <h3 class="project-card__title">${repo.name.replace(/[-_]/g, ' ').toUpperCase()}</h3>
+                    <p class="project-card__desc">${desc}</p>
+                    <div class="project-card__tags">
+                      ${topicsHTML}
+                    </div>
+                  </article>
+                `;
+              }).join('')}
             </div>
+
+            <button class="carousel-btn carousel-btn--next" aria-label="Próximo">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+            </button>
           </div>
-          <h3 class="project-card__title">${repo.name.replace(/[-_]/g, ' ').toUpperCase()}</h3>
-          <p class="project-card__desc">${desc}</p>
-          <div class="project-card__tags">
-            ${topicsHTML}
-          </div>
-        </article>
+        </div>
       `;
       
-      projectsGrid.insertAdjacentHTML('beforeend', cardHTML);
+      projectsGrid.insertAdjacentHTML('beforeend', categoryHTML);
     });
 
     // Se a função setupFilters existir (carregada do filters.js), inicializa
     if (window.setupFilters) {
-      window.setupFilters(repos);
+      window.setupFilters(reposByLang);
+    }
+    
+    // Inicializa a lógica de carrossel após adicionar ao DOM
+    if (window.setupCarousels) {
+      window.setupCarousels();
     }
 
   } catch (error) {

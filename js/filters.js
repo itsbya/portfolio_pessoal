@@ -45,19 +45,19 @@ function setupFilters(projects) {
       
       const filterValue = btn.dataset.filter;
       
-      // Filtrar projetos
-      const cards = projectsGrid.querySelectorAll('.project-card');
-      cards.forEach(card => {
+      // Filtrar categorias de projetos (carrosséis)
+      const categories = projectsGrid.querySelectorAll('.projects-category');
+      categories.forEach(category => {
         if (filterValue === 'all') {
-          card.style.display = 'flex';
-          setTimeout(() => { card.style.opacity = '1'; }, 50);
+          category.style.display = 'block';
+          setTimeout(() => { category.style.opacity = '1'; }, 50);
         } else {
-          if (card.dataset.language === filterValue) {
-            card.style.display = 'flex';
-            setTimeout(() => { card.style.opacity = '1'; }, 50);
+          if (category.dataset.language === filterValue) {
+            category.style.display = 'block';
+            setTimeout(() => { category.style.opacity = '1'; }, 50);
           } else {
-            card.style.opacity = '0';
-            setTimeout(() => { card.style.display = 'none'; }, 300);
+            category.style.opacity = '0';
+            setTimeout(() => { category.style.display = 'none'; }, 300);
           }
         }
       });
