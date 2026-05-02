@@ -385,7 +385,6 @@ h1, h2, h3 {
 }
 
 .project-card:hover {
-  transform: translateY(-5px);
   border-color: var(--accent-secondary);
   box-shadow: var(--shadow-lg);
 }
@@ -796,18 +795,6 @@ h1, h2, h3 {
   scroll-snap-align: start;
 }
 
-@media (min-width: 768px) {
-  .carousel-track > * {
-    flex: 0 0 calc(50% - (var(--space-lg) / 2));
-  }
-}
-
-@media (min-width: 1024px) {
-  .carousel-track > * {
-    flex: 0 0 calc(33.333% - (var(--space-lg) * 2 / 3));
-  }
-}
-
 .carousel-btn {
   position: absolute;
   top: 50%;
@@ -963,4 +950,50 @@ h1, h2, h3 {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+}
+
+/* =========================================
+   PROJECT CARD HORIZONTAL E ICONS
+   ========================================= */
+@media (min-width: 768px) {
+  .project-card {
+    flex-direction: row;
+    align-items: stretch;
+  }
+  
+  .project-card__image {
+    width: 45%;
+    border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+    border-bottom: none;
+    border-right: 1px solid var(--border-color);
+  }
+  
+  .project-card__content {
+    width: 55%;
+    justify-content: center; /* Centraliza conteúdo verticalmente se a imagem for mais alta */
+  }
+}
+
+.project-card__technologies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+}
+
+.tech-icon {
+  height: 28px;
+  width: auto;
+  transition: transform var(--transition-fast);
+}
+
+.tech-icon:hover {
+  transform: scale(1.1);
+}
+
+/* Tratamento para ícones monocromáticos no dark mode - GitHub por exemplo precisa de filter invert se for preto,
+   mas dependendo da cor original (preto) podemos usar invert no modo escuro.
+   O ícone github original do repositório provavelmente é preto. */
+:root:not(.light-mode) .tech-icon[src*="github.svg"] {
+  filter: invert(1);
 }
