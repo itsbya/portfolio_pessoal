@@ -80,6 +80,32 @@ async function fetchProjectsData() {
       reposByLang[language].push(repo);
     });
 
+    // Mapeamento de Imagens
+    const imageMap = {
+      'loja-geek': 'captutra-loja-geek 2026-03-13 220436.png',
+      '7fit': 'img-7fit.webp',
+      '7health': 'img-7health 2026-04-24 213511.png',
+      'portfolio_pessoal': 'img-portifolio-dark 2026-05-02 154337.png',
+      'skycast': 'img-skycast-dark 2026-04-10 225114.png',
+      'todolist': 'img-todolist 2026-04-15 202903.png'
+    };
+
+    // Mapeamento de Ícones
+    const iconMap = {
+      'html': 'html.svg',
+      'css': 'css.svg',
+      'javascript': 'javascript.svg',
+      'typescript': 'typescript.svg',
+      'java': 'java.svg',
+      'kotlin': 'kotlin.svg',
+      'python': 'python.svg',
+      'php': 'php.svg',
+      'go': 'go.svg',
+      'swift': 'swift.svg',
+      'c#': 'csharp.svg',
+      'github': 'github.svg'
+    };
+
     // Renderizar categorias e seus carrosséis
     Object.keys(reposByLang).forEach(lang => {
       const langRepos = reposByLang[lang];
@@ -97,39 +123,71 @@ async function fetchProjectsData() {
               ${langRepos.map(repo => {
                 const initial = lang.substring(0, 2).toUpperCase();
                 const desc = repo.description 
-                  ? (repo.description.length > 100 ? repo.description.substring(0, 97) + '...' : repo.description)
+                  ? repo.description
                   : 'Projeto desenvolvido no GitHub. Acesse o código para mais detalhes.';
 
-                const topicsHTML = repo.topics && repo.topics.length > 0 
-                  ? repo.topics.slice(0,3).map(t => `<span class="tag">${t}</span>`).join('')
-                  : `<span class="tag">${lang}</span>`;
+                const repoNameLower = repo.name.toLowerCase();
+                
+                // Tratar a imagem
+                let imgHTML = '';
+                let matchImage = null;
+                Object.keys(imageMap).forEach(key => {
+                  if (repoNameLower.includes(key)) {
+                    matchImage = imageMap[key];
+                  }
+                });
 
-                const hasDeploy = repo.homepage ? `<a href="${repo.homepage}" target="_blank" class="project-card__link">Acessar Projeto ↗</a>` : '';
+                if (matchImage) {
+                  imgHTML = `<img src="assets/img-projetos/${matchImage}" alt="Captura de tela do projeto ${repo.name}" loading="lazy" />`;
+                } else {
+                  imgHTML = `
+                    <svg viewBox="0 0 24 24" fill="currentColor" class="project-card__placeholder">
+                      <path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5c.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34c-.46-1.16-1.11-1.47-1.11-1.47c-.91-.62.07-.6.07-.6c1 .07 1.53 1.03 1.53 1.03c.87 1.52 2.34 1.07 2.91.83c.09-.65.35-1.09.63-1.34c-2.22-.25-4.55-1.11-4.55-4.92c0-1.11.38-2 1.03-2.71c-.1-.25-.45-1.29.1-2.64c0 0 .84-.27 2.75 1.02c.79-.22 1.65-.33 2.5-.33c.85 0 1.71.11 2.5.33c1.91-1.29 2.75-1.02 2.75-1.02c.55 1.35.2 2.39.1 2.64c.65.71 1.03 1.6 1.03 2.71c0 3.82-2.34 4.66-4.57 4.91c.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/>
+                    </svg>
+                  `;
+                }
 
-                return `
+                // Tratar os tópicos e a linguagem principal para os ícones
+                let techs = [];
+                if (repo.language) techs.push(repo.language.toLowerCase());
+                if (repo.topics) {
+                  repo.topics.forEach(t => techs.push(t.toLowerCase()));
+                }
+                // Remover duplicatas
+                techs = [...new Set(techs)];
+                
+                // Se não tiver techs, adiciona linguagem da categoria como fallback
+                if (techs.length === 0) techs.push(lang.toLowerCase());
+
+                const topicsHTML = \`<div class="project-card__technologies">\` + techs.slice(0, 5).map(t => {
+                  if (iconMap[t]) {
+                    return \`<img src="assets/icons/languages/\${iconMap[t]}" alt="\${t}" title="\${t}" class="tech-icon" />\`;
+                  } else {
+                    return \`<span class="tag">\${t}</span>\`;
+                  }
+                }).join('') + \`</div>\`;
+
+                const hasDeploy = repo.homepage ? \`<a href="\${repo.homepage}" target="_blank" class="project-card__link">Acessar Projeto ↗</a>\` : '';
+
+                return \`
                   <article class="project-card">
                     <div class="project-card__image">
-                      <!-- Placeholder: Logo do GitHub. Substitua por uma tag <img> com loading="lazy" quando tiver as imagens reais -->
-                      <svg viewBox="0 0 24 24" fill="currentColor" class="project-card__placeholder">
-                        <path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5c.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34c-.46-1.16-1.11-1.47-1.11-1.47c-.91-.62.07-.6.07-.6c1 .07 1.53 1.03 1.53 1.03c.87 1.52 2.34 1.07 2.91.83c.09-.65.35-1.09.63-1.34c-2.22-.25-4.55-1.11-4.55-4.92c0-1.11.38-2 1.03-2.71c-.1-.25-.45-1.29.1-2.64c0 0 .84-.27 2.75 1.02c.79-.22 1.65-.33 2.5-.33c.85 0 1.71.11 2.5.33c1.91-1.29 2.75-1.02 2.75-1.02c.55 1.35.2 2.39.1 2.64c.65.71 1.03 1.6 1.03 2.71c0 3.82-2.34 4.66-4.57 4.91c.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/>
-                      </svg>
+                      \${imgHTML}
                     </div>
                     <div class="project-card__content">
                       <div class="project-card__header">
-                        <div class="project-card__icon">${initial}</div>
+                        <div class="project-card__icon">\${initial}</div>
                         <div class="project-card__links">
-                          ${hasDeploy}
-                          <a href="${repo.html_url}" target="_blank" class="project-card__link">Ver Código ↗</a>
+                          \${hasDeploy}
+                          <a href="\${repo.html_url}" target="_blank" class="project-card__link">Ver Código ↗</a>
                         </div>
                       </div>
-                      <h3 class="project-card__title">${repo.name.replace(/[-_]/g, ' ').toUpperCase()}</h3>
-                      <p class="project-card__desc">${desc}</p>
-                      <div class="project-card__tags">
-                        ${topicsHTML}
-                      </div>
+                      <h3 class="project-card__title">\${repo.name.replace(/[-_]/g, ' ').toUpperCase()}</h3>
+                      \${topicsHTML}
+                      <p class="project-card__desc">\${desc}</p>
                     </div>
                   </article>
-                `;
+                \`;
               }).join('')}
             </div>
 
