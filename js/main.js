@@ -138,7 +138,7 @@ async function fetchProjectsData() {
 
     // Se a função setupFilters existir (carregada do filters.js), inicializa
     if (window.setupFilters) {
-      window.setupFilters(reposByLang);
+      window.setupFilters(repos);
     }
     
     // Inicializa a lógica de carrossel após adicionar ao DOM

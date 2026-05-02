@@ -10,9 +10,8 @@ function setupFilters(projects) {
   // Extrair todas as linguagens únicas
   const languages = new Set();
   projects.forEach(p => {
-    if (p.language) {
-      languages.add(p.language);
-    }
+    const lang = p.language || 'Outros';
+    languages.add(lang);
   });
   
   // Limpar container e criar botão "Todos"
