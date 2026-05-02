@@ -65,6 +65,8 @@
   <main>
     <!-- Seção Hero -->
     <section id="hero" class="hero reveal">
+      <!-- Canvas 3D de Fundo (Apenas na Hero) -->
+      <canvas id="bg-canvas"></canvas>
       <div class="container">
         <div class="hero__content">
           <span class="hero__greeting">Olá, eu sou a Ana Beatriz</span>
@@ -405,6 +407,8 @@
   </footer>
 
   <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+  <script src="./js/three-background.js"></script>
   <script src="./js/carousel.js"></script>
   <script src="./js/skills.js"></script>
   <script src="./js/filters.js"></script>
