@@ -3,6 +3,10 @@
 ---
  
 <div align="center"> 
+<img src="https://ik.imagekit.io/o02kjfcyy/img-portifolio-light%202026-05-02%20154337.png" alt="Imagem-Home" /> 
+
+<br />
+
 <img src="https://img.shields.io/badge/HTML-5-orange?style=for-the-badge&logo=html5" alt="HTML Badge" /> 
 <img src="https://img.shields.io/badge/CSS-3-purple?style=for-the-badge&logo=css&logoColor=purple" alt="CSS Badge" /> 
 <img src="https://img.shields.io/badge/JavaScript-ES6+-yellow?style=for-the-badge&logo=javascript&logoColor=yellow%22" alt="JavaScript Badge" /> 
