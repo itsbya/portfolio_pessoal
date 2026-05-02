@@ -104,7 +104,7 @@ async function fetchProjectsData() {
                   ? repo.topics.slice(0,3).map(t => `<span class="tag">${t}</span>`).join('')
                   : `<span class="tag">${lang}</span>`;
 
-                const hasDeploy = repo.homepage ? `<a href="${repo.homepage}" target="_blank" class="project-card__link">Deploy ↗</a>` : '';
+                const hasDeploy = repo.homepage ? `<a href="${repo.homepage}" target="_blank" class="project-card__link">Acessar Projeto ↗</a>` : '';
 
                 return `
                   <article class="project-card">
@@ -119,7 +119,7 @@ async function fetchProjectsData() {
                         <div class="project-card__icon">${initial}</div>
                         <div class="project-card__links">
                           ${hasDeploy}
-                          <a href="${repo.html_url}" target="_blank" class="project-card__link">Code ↗</a>
+                          <a href="${repo.html_url}" target="_blank" class="project-card__link">Ver Código ↗</a>
                         </div>
                       </div>
                       <h3 class="project-card__title">${repo.name.replace(/[-_]/g, ' ').toUpperCase()}</h3>
