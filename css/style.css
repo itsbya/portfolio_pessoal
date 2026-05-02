@@ -850,3 +850,68 @@ h1, h2, h3 {
 .projects__grid {
   display: block; /* Desativa grid antigo para os carrosseis fluírem de cima para baixo */
 }
+
+/* =========================================
+   SKILLS PROGRESS BARS
+   ========================================= */
+.skill-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.skill-item:hover .skill-item__info {
+  color: var(--accent-primary);
+}
+
+.skill-item__info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: var(--space-xs);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  transition: color var(--transition-fast);
+}
+
+.skill-item__bar-container {
+  width: 100%;
+  height: 8px;
+  background: var(--bg-tertiary);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.skill-item__bar-fill {
+  height: 100%;
+  width: 0; /* Começa em zero para animação */
+  background: var(--bar-color, var(--gradient-accent));
+  border-radius: var(--radius-full);
+  transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* =========================================
+   CAROUSEL DOTS
+   ========================================= */
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-xs);
+  margin-top: var(--space-md);
+}
+
+.carousel-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+  background: var(--bg-tertiary);
+  cursor: pointer;
+  transition: var(--transition-fast);
+  border: none;
+  padding: 0;
+}
+
+.carousel-dot.active,
+.carousel-dot:hover {
+  background: var(--accent-primary);
+  transform: scale(1.2);
+}
