@@ -159,35 +159,35 @@ async function fetchProjectsData() {
                 // Se não tiver techs, adiciona linguagem da categoria como fallback
                 if (techs.length === 0) techs.push(lang.toLowerCase());
 
-                const topicsHTML = \`<div class="project-card__technologies">\` + techs.slice(0, 5).map(t => {
+                const topicsHTML = `<div class="project-card__technologies">` + techs.slice(0, 5).map(t => {
                   if (iconMap[t]) {
-                    return \`<img src="assets/icons/languages/\${iconMap[t]}" alt="\${t}" title="\${t}" class="tech-icon" />\`;
+                    return `<img src="assets/icons/languages/${iconMap[t]}" alt="${t}" title="${t}" class="tech-icon" />`;
                   } else {
-                    return \`<span class="tag">\${t}</span>\`;
+                    return `<span class="tag">${t}</span>`;
                   }
-                }).join('') + \`</div>\`;
+                }).join('') + `</div>`;
 
-                const hasDeploy = repo.homepage ? \`<a href="\${repo.homepage}" target="_blank" class="project-card__link">Acessar Projeto ↗</a>\` : '';
+                const hasDeploy = repo.homepage ? `<a href="${repo.homepage}" target="_blank" class="project-card__link">Acessar Projeto ↗</a>` : '';
 
-                return \`
+                return `
                   <article class="project-card">
                     <div class="project-card__image">
-                      \${imgHTML}
+                      ${imgHTML}
                     </div>
                     <div class="project-card__content">
                       <div class="project-card__header">
-                        <div class="project-card__icon">\${initial}</div>
+                        <div class="project-card__icon">${initial}</div>
                         <div class="project-card__links">
-                          \${hasDeploy}
-                          <a href="\${repo.html_url}" target="_blank" class="project-card__link">Ver Código ↗</a>
+                          ${hasDeploy}
+                          <a href="${repo.html_url}" target="_blank" class="project-card__link">Ver Código ↗</a>
                         </div>
                       </div>
-                      <h3 class="project-card__title">\${repo.name.replace(/[-_]/g, ' ').toUpperCase()}</h3>
-                      \${topicsHTML}
-                      <p class="project-card__desc">\${desc}</p>
+                      <h3 class="project-card__title">${repo.name.replace(/[-_]/g, ' ').toUpperCase()}</h3>
+                      ${topicsHTML}
+                      <p class="project-card__desc">${desc}</p>
                     </div>
                   </article>
-                \`;
+                `;
               }).join('')}
             </div>
 

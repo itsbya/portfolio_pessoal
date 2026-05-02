@@ -385,7 +385,6 @@ h1, h2, h3 {
 }
 
 .project-card:hover {
-  transform: translateY(-5px);
   border-color: var(--accent-secondary);
   box-shadow: var(--shadow-lg);
 }
