@@ -1,234 +1,212 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <!-- Fontes do Google -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="author" content="Ana Beatriz" />
+  <meta name="description" content="Portfólio Pessoal de Ana Beatriz Carvalho, desenvolvedora Full Stack focado em aplicações web modernas e escaláveis." />
+  <meta name="robots" content="index, follow" />
 
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="author" content="Ana Beatriz" />
-    <meta
-      name="description"
-      content="Portfólio Pessoal de Ana Beatriz Carvalho, 
-                desenvolvedora Full Stack especializado em criar experiências 
-                digitais incríveis. Conheça meus projetos e entre em contato."
-    />
-    <meta name="robots" content="index, follow" />
+  <title>Portfólio | Ana Beatriz - Full Stack</title>
+  
+  <link rel="icon" type="image/svg+xml" href="./assets/img/favicon.svg" />
 
-    <link rel="icon" type="image/svg+xml" href="./assets/img/favicon.svg" />
+  <!-- Google Fonts: Inter e JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
 
-    <!-- Fonte do Google - Poppins -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
-      rel="stylesheet"
-    />
+  <!-- Scripts: Theme (carregado cedo para evitar flash) -->
+  <script src="./js/theme.js"></script>
 
-    <!-- SWIPER CSS -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
-    />
+  <!-- CSS -->
+  <link rel="stylesheet" href="./css/variables.css" />
+  <link rel="stylesheet" href="./css/reset.css" />
+  <link rel="stylesheet" href="./css/style.css" />
+</head>
+<body>
+  <!-- Indicador de progresso de leitura -->
+  <div class="scroll-progress" id="scroll-progress"></div>
 
-    <!-- CSS Principal da página -->
-    <link rel="stylesheet" href="./assets/css/style.css" />
+  <!-- Cabeçalho -->
+  <header class="header">
+    <div class="container header__inner">
+      <a href="#" class="header__logo">[ABDEV]</a>
+      
+      <nav class="header__nav">
+        <ul class="nav__list">
+          <li><a href="#hero" class="nav__link active">Início</a></li>
+          <li><a href="#about" class="nav__link">Sobre</a></li>
+          <li><a href="#projects" class="nav__link">Projetos</a></li>
+          <li><a href="#contact" class="nav__link">Contato</a></li>
+        </ul>
+      </nav>
 
-    <title>Portfólio de Ana Beatriz</title>
-  </head>
-  <body>
-    <!-- Cabeçalho da página -->
-    <header>
-      <div class="menu-content">
-        <!-- Título do Cabeçalho -->
-        <a href="index.html" id="titulo">[ABDEV]</a>
+      <div style="display:flex; align-items:center; gap: 1rem;">
+        <!-- Botão Toggle Theme -->
+        <button id="theme-toggle" class="theme-toggle" aria-label="Alternar Tema Escuro/Claro">
+          <span id="theme-icon">
+            <!-- SVG de Lua por padrão, gerenciado pelo theme.js -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+          </span>
+        </button>
 
-        <!-- Menu de Navegação -->
-        <nav>
-          <ul class="menu-list">
-            <li><a href="#hero">Início</a></li>
-            <li><a href="#about">Sobre</a></li>
-            <!--<li><a href="#skills">Skills</a></li>-->
-            <li><a href="#projects">Projetos</a></li>
-            <li><a href="#contact">Contatos</a></li>
-          </ul>
-        </nav>
+        <!-- Botão Menu Mobile -->
+        <div class="menu-toggle" aria-label="Abrir Menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
       </div>
-    </header>
+    </div>
+  </header>
 
-    <!-- Seção Principal da página -->
-    <main>
-      <!-- Seção Hero -->
-      <section id="hero" class="section-container hero-container">
-        <!-- Boas Vindas -->
-        <article class="hero-content">
-          <span>Olá, eu sou a Ana Beatriz</span>
-          <h1>Desenvolvedora Full Stack</h1>
-          <p>Focada em criar aplicações web modernas e escaláveis</p>
-
-          <div class="buttons-container">
-            <a href="#contact" class="botao">Entre em contato</a>
-            <a href="#about" class="botao-outline">Saiba mais...</a>
+  <main>
+    <!-- Seção Hero -->
+    <section id="hero" class="hero reveal">
+      <div class="container">
+        <div class="hero__content">
+          <span class="hero__greeting">Olá, eu sou a Ana Beatriz</span>
+          <h1 class="hero__title">Desenvolvedora <br> <span class="text-gradient">Full Stack.</span></h1>
+          <p class="hero__subtitle">Focada em criar aplicações web modernas, escaláveis e com alto desempenho. Apaixonada por transformar ideias em código e gerar impacto real.</p>
+          
+          <div class="hero__actions">
+            <a href="#projects" class="btn btn--primary">Ver Projetos</a>
+            <a href="#contact" class="btn btn--outline">Entrar em Contato</a>
           </div>
-        </article>
-
-        <!-- Imagem da Seção Hero -->
-        <!-- <figure class="hero-image"> 
-        <img src="https://ik.imagekit.io/o02kjfcyy/Adobe%20Express%20-%20file.jpg"
-             alt="Foto do autor do site"
-             class="float-animation"
-        >
-      </figure>-->
-      </section>
-
-      <!-- Seção About -->
-      <section id="about" class="section-container about-container"></section>
-
-      <!-- Seção Skills 
-      <section id="skills" class="section-container skills-container">
-        <h2>Minha Skills</h2>
-
-        <div class="skill-card">
-          <h3>Front-End</h3>
-          <p>HTML, CSS, JavaScript, React</p>
         </div>
+      </div>
+    </section>
 
-        <div class="skill-card">
-          <h3>Back-End</h3>
-          <p>Node.js, Express, NestJS</p>
-        </div>
-
-        <div class="skill-card">
-          <h3>Banco de Dados</h3>
-          <p>MySQL, JSON</p>
-        </div>
-
-        <div class="skill-card">
-          <h3>Ferramentas</h3>
-          <p>Git, GitHub, Postman</p>
-        </div>
-      </section>-->
-
-      <!-- Seção Projects -->
-      <section id="projects" class="section-container projects-container">
-        <h2>Meus Projetos</h2>
-
-        <!-- Swiper Container -->
-        <div class="swiper projects-swiper">
-          <div class="swiper-wrapper"></div>
-
-          <!-- Botões de Navegação -->
-          <div class="swiper-button-next"></div>
-          <div class="swiper-button-prev"></div>
-
-          <!-- Paginação -->
-          <div class="swiper-pagination"></div>
-        </div>
-      </section>
-
-      <!-- Seção Contact -->
-      <section id="contact" class="section-container contact-container">
-        <!-- Redes Sociais -->
-        <article class="contact-info">
-          <h2>Entre em contato</h2>
-          <p>Sinta-se à vontade para entrar em contato comigo!</p>
-
-          <!-- Links para as Redes Sociais -->
-          <div class="social-container">
-            <a
-              href="#"
-              target="_blank"
-              class="social-icon"
-              aria-label="Linkedin"
-            >
-              <img
-                src="./assets/icons/social/linkedin.svg"
-                alt="Link para o LinkedIn"
-              />
-            </a>
-
-            <a href="#" target="_blank" class="social-icon" aria-label="GitHub">
-              <img
-                src="./assets/icons/social/github.svg"
-                alt="Link para o GitHub"
-              />
-            </a>
-
-            <a
-              href="#"
-              target="_blank"
-              class="social-icon"
-              aria-label="Instagram"
-            >
-              <img
-                src="./assets/icons/social/instagram.svg"
-                alt="Link para o Instagram"
-              />
-            </a>
+    <!-- Seção Sobre -->
+    <section id="about" class="section">
+      <div class="container">
+        <h2 class="section__title reveal">Sobre mim</h2>
+        
+        <div class="about__grid">
+          <div class="about__image-wrapper reveal">
+            <img id="about-image" src="" alt="Carregando..." class="about__image" />
           </div>
-        </article>
+          
+          <div class="about__content reveal">
+            <p class="about__text">
+              <strong class="text-gradient">Desenvolvedora Full Stack</strong> em formação em Engenharia de Software e pela Generation Brasil.
+              Tenho experiência prática e adoro o ecossistema <span class="text-gradient">JavaScript/TypeScript</span>, construindo desde o Front-end até a API.
+            </p>
+            <p class="about__text">
+              Minha stack principal inclui Node.js, Nest.JS, React e bancos de dados relacionais (MySQL). Busco ativamente oportunidades de <span class="text-gradient">Estágio</span> para aplicar boas práticas como SOLID e Clean Code no mercado de trabalho.
+            </p>
+            
+            <div class="about__stats">
+              <div class="stat-card">
+                <span class="stat-card__number" id="stat-followers">0</span>
+                <span class="stat-card__label">Seguidores</span>
+              </div>
+              <div class="stat-card">
+                <span class="stat-card__number" id="stat-repos">0</span>
+                <span class="stat-card__label">Repositórios</span>
+              </div>
+            </div>
+            
+            <div class="about__actions">
+              <a href="#" id="btn-github" target="_blank" class="btn btn--outline">Meu GitHub</a>
+              <a href="https://drive.google.com/file/d/1CPqjXyPpQRhi2z3nw2AUQF9sYKmwz53d/view" target="_blank" class="btn btn--primary">Currículo</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-        <!-- Formulário de Contato -->
-        <form
-          id="formulario"
-          action="https://formsubmit.co/f51146f3bafad2707c1be3890d7255c1"
-          method="POST"
-        >
-          <input
-            type="hidden"
-            name="_next"
-            value="https://itsbya.github.io/portfolio_pessoal/success.html"
-          />
-          <input type="hidden" name="_captcha" value="false" />
+    <!-- Seção Projetos -->
+    <section id="projects" class="section">
+      <div class="container">
+        <h2 class="section__title reveal">Meus Projetos</h2>
+        
+        <!-- Filtros -->
+        <div id="projects-filters" class="projects__filters reveal">
+          <!-- Gerado dinamicamente -->
+        </div>
 
-          <label for="nome">Nome</label>
-          <input
-            id="nome"
-            name="nome"
-            type="text"
-            placeholder="Digite o seu nome completo"
-          />
-          <span id="erro-nome"></span>
+        <!-- Grid de Projetos -->
+        <div id="projects-grid" class="projects__grid">
+          <!-- Carregado via GitHub API (js/main.js) -->
+        </div>
+      </div>
+    </section>
 
-          <label for="email">E-mail</label>
-          <input
-            id="email"
-            name="email"
-            type="text"
-            placeholder="Digite o seu e-mail"
-          />
-          <span id="erro-email"></span>
+    <!-- Seção Contato -->
+    <section id="contact" class="section">
+      <div class="container">
+        <h2 class="section__title reveal">Contato</h2>
+        
+        <div class="contact__grid">
+          <div class="contact__info reveal">
+            <h3>Vamos trabalhar juntos?</h3>
+            <p class="contact__desc">Sinta-se à vontade para entrar em contato comigo para oportunidades, dúvidas ou apenas dar um oi. Responderei o mais breve possível!</p>
+            
+            <div class="social-links">
+              <a href="https://linkedin.com/in/itsbya" target="_blank" class="social-link" aria-label="LinkedIn">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+              </a>
+              <a href="https://github.com/itsbya" target="_blank" class="social-link" aria-label="GitHub">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+              </a>
+              <a href="#" target="_blank" class="social-link" aria-label="Instagram">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+              </a>
+            </div>
+          </div>
+          
+          <div class="contact__form reveal">
+            <form id="formulario" class="form" action="https://formsubmit.co/f51146f3bafad2707c1be3890d7255c1" method="POST">
+              <input type="hidden" name="_next" value="https://itsbya.github.io/portfolio_pessoal/success.html" />
+              <input type="hidden" name="_captcha" value="false" />
+              <input type="hidden" name="_template" value="table" />
+              
+              <div class="form__group">
+                <label for="nome" class="form__label">Nome</label>
+                <input id="nome" name="nome" type="text" class="form__input" placeholder="Seu nome completo" />
+                <span id="erro-nome" class="form__error"></span>
+              </div>
+              
+              <div class="form__group">
+                <label for="email" class="form__label">E-mail</label>
+                <input id="email" name="email" type="text" class="form__input" placeholder="seu@email.com" />
+                <span id="erro-email" class="form__error"></span>
+              </div>
+              
+              <div class="form__group">
+                <label for="assunto" class="form__label">Assunto</label>
+                <input id="assunto" name="assunto" type="text" class="form__input" placeholder="Motivo do contato" />
+                <span id="erro-assunto" class="form__error"></span>
+              </div>
+              
+              <div class="form__group">
+                <label for="mensagem" class="form__label">Mensagem</label>
+                <textarea id="mensagem" name="mensagem" class="form__textarea" placeholder="Como posso ajudar?"></textarea>
+                <span id="erro-mensagem" class="form__error"></span>
+              </div>
+              
+              <button class="btn btn--primary" type="submit" style="align-self: flex-start;">
+                Enviar Mensagem
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 
-          <label for="assunto">Assunto</label>
-          <input
-            id="assunto"
-            name="assunto"
-            type="text"
-            placeholder="Digite o assunto da mensagem"
-          />
-          <span id="erro-assunto"></span>
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p class="footer__text">Projetado e Desenvolvido por Ana Beatriz Carvalho &copy; 2026</p>
+    </div>
+  </footer>
 
-          <label for="mensagem">Mensagem</label>
-          <textarea
-            id="mensagem"
-            name="mensagem"
-            placeholder="Digite a sua mensagem"
-          ></textarea>
-          <span id="erro-mensagem"></span>
-
-          <button class="botao" type="submit">Enviar Mensagem</button>
-        </form>
-      </section>
-    </main>
-
-    <!-- Rodapé da página -->
-    <footer>
-      <p>Desenvolvido por Ana Beatriz Carvalho - 2026</p>
-    </footer>
-
-    <!-- SWIPER JS -->
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-
-    <!-- Script JavaScript Principal da página -->
-    <script src="./assets/js/script.js"></script>
-  </body>
+  <!-- Scripts -->
+  <script src="./js/filters.js"></script>
+  <script src="./js/animations.js"></script>
+  <script src="./js/main.js"></script>
+</body>
 </html>
