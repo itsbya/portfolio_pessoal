@@ -10,31 +10,23 @@
  
 <br />
  
-O **Projeto Portfólio Pessoal** é um **site profissional moderno**, desenvolvido com **HTML, CSS e JavaScript**, com o objetivo de apresentar informações sobre a pessoa desenvolvedora, seus projetos e formas de contato de maneira clara, interativa e responsiva.
- 
-O projeto consome dados dinâmicos da **API do GitHub**, permitindo que informações como perfil e repositórios sejam carregadas automaticamente, mantendo o conteúdo sempre atualizado.
- 
-------
- 
-## Funcionalidades
- 
-- Estrutura de páginas desenvolvida com **HTML semântico**
-- Estilização moderna com **CSS**, utilizando:
-  - Variáveis CSS
-  - Animações
-  - Layout responsivo (desktop, tablet e mobile)
-- Integração com a **API do GitHub** para:
-  - Exibição dinâmica das informações do perfil
-  - Listagem automática dos repositórios
-- Exibição dos projetos em **carrossel interativo** utilizando **Swiper.js**
-- **Formulário de contato com validação no frontend**, garantindo o correto preenchimento dos campos
-- Página dedicada de **confirmação de envio** do formulário
-- Navegação fluida com menu fixo e rolagem suave
-- Interface intuitiva e organizada, focada na experiência do usuário
+O **Projeto Portfólio Pessoal** é um **site profissional e minimalista**, desenhado com foco em usabilidade, performance e estética (inspirado em designs como Vercel e Linear). Ele foi inteiramente construído utilizando tecnologias nativas (**Vanilla Stack**: HTML5, CSS3 e JavaScript ES6+), sem dependências pesadas de bibliotecas externas.
+
+O projeto consome dados dinâmicos da **API do GitHub**, preenchendo as informações de perfil e agrupando automaticamente os repositórios em formato de carrossel.
  
 ------
  
-## Estrutura do Projeto
+## ✨ Novidades do Redesign
+ 
+- **Dark & Light Mode:** Suporte completo a temas dinâmicos via CSS Custom Properties com persistência no `localStorage`.
+- **Carrossel Nativo:** Remoção de bibliotecas de terceiros (como Swiper.js). A nova lógica foi recriada 100% em JS nativo suportando navegação por setas, arrasto de mouse/touch (drag/swipe) e navegação por teclado para acessibilidade.
+- **Gráficos de Habilidades:** Seção de *skills* redesenhada com barras de progresso que são preenchidas com animações suaves apenas quando rolam para dentro da tela (usando `IntersectionObserver`).
+- **Arquitetura Modular:** Separação do código JavaScript e CSS em módulos lógicos (`theme.js`, `main.js`, `carousel.js`, `filters.js`, etc) seguindo a metodologia BEM no CSS.
+- **Micro-interações:** Hover dinâmico nos cards de projetos, com suporte a placeholder de imagens para pre-visualizações elegantes.
+ 
+------
+ 
+## ⚙️ Estrutura do Projeto
  
 ```
 portfolio/
@@ -42,40 +34,36 @@ portfolio/
 ├── index.html        # Página principal do portfólio
 ├── success.html      # Página de confirmação de envio do formulário
 │
-├── assets/
-│   ├── css/
-│   │   └── styles.css    # Estilos e responsividade
-│   ├── js/
-│   │   └── scripts.js   # Integração com GitHub, carrossel e validações
-│   ├── img/             # Imagens e ilustrações
-│   └── icons/           # Ícones das linguagens e redes sociais
+├── css/
+│   ├── reset.css     # Limpeza de estilos padrão
+│   ├── variables.css # Design System: Cores (Dark/Light), Espaçamentos, Tipografia
+│   └── style.css     # Estilos principais organizados via Metodologia BEM
+│
+├── js/
+│   ├── theme.js      # Lógica de controle Dark/Light Mode
+│   ├── main.js       # Fetch da GitHub API e validações de formulário
+│   ├── carousel.js   # Lógica do carrossel horizontal em Vanilla JS
+│   ├── skills.js     # IntersectionObserver para a animação das barras de progresso
+│   ├── filters.js    # Filtragem dinâmica do carrossel por linguagem
+│   └── animations.js # Efeitos On-Scroll, Scroll Progress Bar e Header dinâmico
 │
 └── README.md
 ```
  
 ------
  
-## Tecnologias Utilizadas
+## 💻 Tecnologias Utilizadas
  
-- **HTML5**: Estruturação semântica do conteúdo
-- **CSS3**: Estilização, layout responsivo e animações
-- **JavaScript (ES6+)**: Interatividade, consumo de APIs e validações
-- **Swiper.js**: Carrossel de projetos responsivo
-- **Fom Submit:** Serviço de envio de e-mails via formulário HTML
-- **GitHub API**: Fonte dinâmica de dados do perfil e repositórios
+- **HTML5 Semântico**: Focado em acessibilidade (`aria-labels`, `roles`, navegação estruturada).
+- **CSS3 Moderno**: Layout via Grid e Flexbox, tipografia fluida, animações e Glassmorphism.
+- **JavaScript (ES6+)**: Interatividade dom DOM, Promises/Async Await, IntersectionObservers e Event Listeners.
+- **GitHub REST API**: Fonte assíncrona de dados do perfil e organização inteligente de repositórios.
  
 ------
  
-## Executando Localmente
+## 🚀 Executando Localmente
  
-Para executar o projeto em ambiente local, siga os passos abaixo.
- 
-### Pré-requisitos
- 
-- [Visual Studio Code](https://code.visualstudio.com/) (ou outro editor de sua preferência)
-- Extensão **Live Server** instalada no VS Code
- 
-### Passos
+Para executar o projeto em ambiente local e visualizar a API do GitHub sendo populada:
  
 1. Clone o repositório:
  
@@ -86,29 +74,27 @@ Para executar o projeto em ambiente local, siga os passos abaixo.
 2. Acesse a pasta do projeto:
  
    ```bash
-   cd seu-repositorio
+   cd portfolio_pessoal
    ```
  
-3. Abra o projeto no Visual Studio Code:
+3. Abra o projeto no Visual Studio Code (ou editor preferido):
  
    ```bash
    code .
    ```
  
-4. Abra o arquivo `index.html`, clique com o botão direito e selecione **"Open with Live Server"**.
- 
-O site será aberto no navegador e todas as alterações poderão ser visualizadas em tempo real.
+4. Devido às requisições fetch, recomenda-se abrir o `index.html` utilizando a extensão **Live Server** (do VS Code) para evitar bloqueios de CORS por protocolo local (`file://`).
  
 ------
  
-## Deploy
+## 🌎 Deploy
  
-Este site está disponível publicamente através do **GitHub Pages**. Você pode acessar a versão online pelo link abaixo:
+O site é servido diretamente através do **GitHub Pages** e as rotas são construídas para funcionar perfeitamente em modo estático. Você pode acessá-lo clicando no link abaixo:
  
-🔗 https://itsbya.github.io/portfolio_pessoal
+🔗 **[Visualizar Portfólio](https://itsbya.github.io/portfolio_pessoal)**
  
 ------
  
-## Contribuições
+## 🤝 Contribuições
  
-Contribuições são bem-vindas. Caso tenha sugestões de melhorias, correções ou novas funcionalidades, sinta-se à vontade para abrir uma **issue** ou enviar um **pull request**.
+Sinta-se livre para abrir *issues* e *pull requests* caso queira utilizar esta estrutura para o seu próprio portfólio, ou sugerir alguma melhoria no design/arquitetura.
