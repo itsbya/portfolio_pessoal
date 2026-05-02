@@ -65,16 +65,29 @@ async function fetchProjectsData() {
   projectsGrid.innerHTML = '<p style="text-align:center; width:100%;">Carregando projetos brilhantes...</p>';
 
   try {
-    const response = await fetch(`https://api.github.com/users/${githubUser}/repos?sort=updated&per_page=6`);
+    // Busca todos os repositórios para filtrar os escolhidos
+    const response = await fetch(`https://api.github.com/users/${githubUser}/repos?sort=updated&per_page=100`);
     if (!response.ok) throw new Error('Falha ao buscar repositórios');
     
-    const repos = await response.json();
+    let repos = await response.json();
     projectsGrid.innerHTML = ''; // Limpa o loading
+
+    // Lista de projetos que eu quero que apareçam (Whitelist)
+    const selectedProjects = [
+      'loja-geek',
+      '7fit',
+      '7health',
+      'portfolio_pessoal',
+      'skycast',
+      'todolist'
+    ];
+
+    // Filtrar apenas os projetos escolhidos
+    repos = repos.filter(repo => selectedProjects.includes(repo.name.toLowerCase()));
 
     // Agrupar repositórios por linguagem
     const reposByLang = {};
     repos.forEach(repo => {
-      // Se não tiver linguagem, agrupa em 'Outros'
       const language = repo.language || 'Outros';
       if (!reposByLang[language]) reposByLang[language] = [];
       reposByLang[language].push(repo);
@@ -127,6 +140,7 @@ async function fetchProjectsData() {
                   : 'Projeto desenvolvido no GitHub. Acesse o código para mais detalhes.';
 
                 const repoNameLower = repo.name.toLowerCase();
+                const langLower = lang.toLowerCase();
                 
                 // Tratar a imagem
                 let imgHTML = '';
@@ -147,24 +161,22 @@ async function fetchProjectsData() {
                   `;
                 }
 
-                // Tratar os tópicos e a linguagem principal para os ícones
+                // Ícone do cabeçalho (Linguagem principal)
+                const headerIconHTML = iconMap[langLower]
+                  ? `<img src="assets/icons/languages/${iconMap[langLower]}" alt="${lang}" class="tech-icon" style="height: 24px;" />`
+                  : initial;
+
+                // Tratar os tópicos para as tags (Removendo a linguagem principal já que ela está no topo)
                 let techs = [];
-                if (repo.language) techs.push(repo.language.toLowerCase());
                 if (repo.topics) {
-                  repo.topics.forEach(t => techs.push(t.toLowerCase()));
+                  repo.topics.forEach(t => {
+                    if (t.toLowerCase() !== langLower) techs.push(t.toLowerCase());
+                  });
                 }
-                // Remover duplicatas
                 techs = [...new Set(techs)];
                 
-                // Se não tiver techs, adiciona linguagem da categoria como fallback
-                if (techs.length === 0) techs.push(lang.toLowerCase());
-
                 const topicsHTML = `<div class="project-card__technologies">` + techs.slice(0, 5).map(t => {
-                  if (iconMap[t]) {
-                    return `<img src="assets/icons/languages/${iconMap[t]}" alt="${t}" title="${t}" class="tech-icon" />`;
-                  } else {
-                    return `<span class="tag">${t}</span>`;
-                  }
+                  return `<span class="tag">${t}</span>`;
                 }).join('') + `</div>`;
 
                 const hasDeploy = repo.homepage ? `<a href="${repo.homepage}" target="_blank" class="project-card__link">Acessar Projeto ↗</a>` : '';
@@ -176,7 +188,7 @@ async function fetchProjectsData() {
                     </div>
                     <div class="project-card__content">
                       <div class="project-card__header">
-                        <div class="project-card__icon">${initial}</div>
+                        <div class="project-card__icon">${headerIconHTML}</div>
                         <div class="project-card__links">
                           ${hasDeploy}
                           <a href="${repo.html_url}" target="_blank" class="project-card__link">Ver Código ↗</a>
