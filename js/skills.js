@@ -1,8 +1,8 @@
 // js/skills.js
-// Lógica para animar as barras de progresso ao dar scroll na página
+// Lógica para animar as barras de progresso ao rolar a página
 
 document.addEventListener('DOMContentLoaded', () => {
-  const skillBars = document.querySelectorAll('.skill-item__bar-fill');
+  const skillBars = document.querySelectorAll('.item-habilidade__barra-preenchimento');
   
   if (skillBars.length === 0) return;
 

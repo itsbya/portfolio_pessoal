@@ -1,10 +1,10 @@
 // js/animations.js
-// Observadores de intersecção e eventos de scroll
+// Observadores de intersecção (Intersection Observer) e eventos de rolagem (scroll)
 
 document.addEventListener('DOMContentLoaded', () => {
-  // 1. ProgressBar e Header Scrolled
-  const progressBar = document.getElementById('scroll-progress');
-  const header = document.querySelector('.header');
+  // 1. Barra de Progresso e Cabeçalho Fixado
+  const progressBar = document.getElementById('progresso-rolagem');
+  const header = document.querySelector('.cabecalho');
   
   window.addEventListener('scroll', () => {
     // Progresso de Leitura
@@ -16,30 +16,30 @@ document.addEventListener('DOMContentLoaded', () => {
       progressBar.style.width = scrolled + '%';
     }
     
-    // Header Glassmorphism e Shrink
+    // Efeito de Vidro (Glassmorphism) e Encolhimento do Cabeçalho
     if (winScroll > 50) {
-      header.classList.add('header--scrolled');
+      header.classList.add('cabecalho--rolagem');
     } else {
-      header.classList.remove('header--scrolled');
+      header.classList.remove('cabecalho--rolagem');
     }
   });
 
   // 2. Menu Mobile e Ativação de Links
-  const menuToggle = document.querySelector('.menu-toggle');
-  const navList = document.querySelector('.header__nav');
-  const navLinks = document.querySelectorAll('.nav__link');
+  const alternadorMenu = document.querySelector('.alternador-menu');
+  const listaNav = document.querySelector('.cabecalho__navegacao');
+  const linksNav = document.querySelectorAll('.navegacao__link');
   
-  if (menuToggle && navList) {
-    menuToggle.addEventListener('click', () => {
-      menuToggle.classList.toggle('open');
-      navList.classList.toggle('open');
+  if (alternadorMenu && listaNav) {
+    alternadorMenu.addEventListener('click', () => {
+      alternadorMenu.classList.toggle('aberto');
+      listaNav.classList.toggle('aberto');
     });
     
     // Fechar menu ao clicar em um link
-    navLinks.forEach(link => {
+    linksNav.forEach(link => {
       link.addEventListener('click', () => {
-        menuToggle.classList.remove('open');
-        navList.classList.remove('open');
+        alternadorMenu.classList.remove('aberto');
+        listaNav.classList.remove('aberto');
       });
     });
   }
@@ -54,13 +54,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const scrollObserver = new IntersectionObserver((entries, observer) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        entry.target.classList.add('active');
+        entry.target.classList.add('ativo');
         // Opcional: parar de observar depois de animar uma vez
         // observer.unobserve(entry.target);
       }
     });
   }, observerOptions);
 
-  const revealElements = document.querySelectorAll('.reveal');
-  revealElements.forEach(el => scrollObserver.observe(el));
+  const elementosRevelar = document.querySelectorAll('.revelar');
+  elementosRevelar.forEach(el => scrollObserver.observe(el));
 });

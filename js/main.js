@@ -6,10 +6,28 @@ const githubUser = 'itsbya';
 document.addEventListener('DOMContentLoaded', () => {
 
   // Adiciona evento ao botão de tema
-  const themeBtn = document.getElementById('theme-toggle');
+  const themeBtn = document.getElementById('alternador-tema');
   if (themeBtn && window.toggleTheme) {
     themeBtn.addEventListener('click', window.toggleTheme);
   }
+
+  // 2. Menu Mobile
+  const alternadorMenu = document.querySelector('.alternador-menu');
+  const navegacaoCabecalho = document.querySelector('.cabecalho__navegacao');
+  
+  if (alternadorMenu) {
+    alternadorMenu.addEventListener('click', () => {
+      alternadorMenu.classList.toggle('aberto');
+      navegacaoCabecalho.classList.toggle('aberto');
+    });
+  }
+
+  document.querySelectorAll('.navegacao__link').forEach(link => {
+    link.addEventListener('click', () => {
+      if (alternadorMenu) alternadorMenu.classList.remove('aberto');
+      if (navegacaoCabecalho) navegacaoCabecalho.classList.remove('aberto');
+    });
+  });
 
   // Busca e preenche os dados do Sobre
   fetchAboutData();
@@ -32,21 +50,21 @@ async function fetchAboutData() {
     const data = await response.json();
 
     // Preencher a Imagem (usando element ID pra facilitar se quisesse, mas vamos buscar e alterar)
-    const aboutImage = document.getElementById('about-image');
+    const aboutImage = document.getElementById('sobre-imagem');
     if (aboutImage) {
       aboutImage.src = data.avatar_url;
       aboutImage.alt = `Foto de ${data.name || githubUser}`;
     }
 
     // Preencher Stats
-    const followersEl = document.getElementById('stat-followers');
-    const reposEl = document.getElementById('stat-repos');
+    const followersEl = document.getElementById('estat-seguidores');
+    const reposEl = document.getElementById('estat-repos');
 
     if (followersEl) followersEl.textContent = data.followers;
     if (reposEl) reposEl.textContent = data.public_repos;
 
     // Atualizar Link do GitHub no botão
-    const githubLink = document.getElementById('btn-github');
+    const githubLink = document.getElementById('botao-github');
     if (githubLink) githubLink.href = data.html_url;
 
   } catch (error) {
@@ -58,7 +76,7 @@ async function fetchAboutData() {
 // SEÇÃO PROJETOS: GitHub API
 // ==========================================
 async function fetchProjectsData() {
-  const projectsGrid = document.getElementById('projects-grid');
+  const projectsGrid = document.getElementById('grid-projetos');
   if (!projectsGrid) return;
 
   // Mostra um loading
@@ -124,15 +142,15 @@ async function fetchProjectsData() {
       const langRepos = reposByLang[lang];
 
       const categoryHTML = `
-        <div class="projects-category reveal" data-language="${lang}">
-          <h3 class="projects-category__title">Projetos em ${lang}</h3>
+        <div class="categoria-projetos revelar" data-language="${lang}">
+          <h3 class="categoria-projetos__titulo">Projetos em ${lang}</h3>
           
-          <div class="carousel-wrapper">
-            <button class="carousel-btn carousel-btn--prev" aria-label="Anterior">
+          <div class="carrossel-wrapper">
+            <button class="carrossel-botao carrossel-botao--anterior" aria-label="Anterior">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
             </button>
             
-            <div class="carousel-track">
+            <div class="carrossel-trilha">
               ${langRepos.map(repo => {
         const initial = lang.substring(0, 2).toUpperCase();
         const desc = repo.description
@@ -155,7 +173,7 @@ async function fetchProjectsData() {
           imgHTML = `<img src="assets/img-projetos/${matchImage}" alt="Captura de tela do projeto ${repo.name}" loading="lazy" />`;
         } else {
           imgHTML = `
-                    <svg viewBox="0 0 24 24" fill="currentColor" class="project-card__placeholder">
+                    <svg viewBox="0 0 24 24" fill="currentColor" class="card-projeto__placeholder">
                       <path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5c.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34c-.46-1.16-1.11-1.47-1.11-1.47c-.91-.62.07-.6.07-.6c1 .07 1.53 1.03 1.53 1.03c.87 1.52 2.34 1.07 2.91.83c.09-.65.35-1.09.63-1.34c-2.22-.25-4.55-1.11-4.55-4.92c0-1.11.38-2 1.03-2.71c-.1-.25-.45-1.29.1-2.64c0 0 .84-.27 2.75 1.02c.79-.22 1.65-.33 2.5-.33c.85 0 1.71.11 2.5.33c1.91-1.29 2.75-1.02 2.75-1.02c.55 1.35.2 2.39.1 2.64c.65.71 1.03 1.6 1.03 2.71c0 3.82-2.34 4.66-4.57 4.91c.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/>
                     </svg>
                   `;
@@ -163,7 +181,7 @@ async function fetchProjectsData() {
 
         // Ícone do cabeçalho (Linguagem principal)
         const headerIconHTML = iconMap[langLower]
-          ? `<img src="assets/icons/languages/${iconMap[langLower]}" alt="${lang}" class="tech-icon" style="height: 24px;" />`
+          ? `<img src="assets/icons/languages/${iconMap[langLower]}" alt="${lang}" class="icone-tecnologia" style="height: 24px;" />`
           : initial;
 
         // Tratar os tópicos para as tags (Removendo a linguagem principal já que ela está no topo)
@@ -175,38 +193,38 @@ async function fetchProjectsData() {
         }
         techs = [...new Set(techs)];
 
-        const topicsHTML = `<div class="project-card__technologies">` + techs.slice(0, 5).map(t => {
+        const topicsHTML = `<div class="card-projeto__tecnologias">` + techs.slice(0, 5).map(t => {
           return `<span class="tag">${t}</span>`;
         }).join('') + `</div>`;
 
-        const hasDeploy = repo.homepage ? `<a href="${repo.homepage}" target="_blank" class="project-card__link">Acessar Projeto ↗</a>` : '';
+        const hasDeploy = repo.homepage ? `<a href="${repo.homepage}" target="_blank" class="card-projeto__link">Acessar Projeto ↗</a>` : '';
 
         return `
-                  <article class="project-card">
-                    <div class="project-card__image">
+                  <article class="card-projeto">
+                    <div class="card-projeto__imagem">
                       ${imgHTML}
                     </div>
-                    <div class="project-card__content">
-                      <div class="project-card__header">
-                        <div class="project-card__icon">${headerIconHTML}</div>
-                        <div class="project-card__links">
+                    <div class="card-projeto__conteudo">
+                      <div class="card-projeto__cabecalho">
+                        <div class="card-projeto__icone">${headerIconHTML}</div>
+                        <div class="card-projeto__links">
                           ${hasDeploy}
-                          <a href="${repo.html_url}" target="_blank" class="project-card__link">Ver Código ↗</a>
+                          <a href="${repo.html_url}" target="_blank" class="card-projeto__link">Ver Código ↗</a>
                         </div>
                       </div>
-                      <h3 class="project-card__title">${repo.name.replace(/[-_]/g, ' ').toUpperCase()}</h3>
+                      <h3 class="card-projeto__titulo">${repo.name.replace(/[-_]/g, ' ').toUpperCase()}</h3>
                       ${topicsHTML}
-                      <p class="project-card__desc">${desc}</p>
+                      <p class="card-projeto__descricao">${desc}</p>
                     </div>
                   </article>
                 `;
       }).join('')}
             </div>
 
-            <button class="carousel-btn carousel-btn--next" aria-label="Próximo">
+            <button class="carrossel-botao carrossel-botao--proximo" aria-label="Próximo">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
             </button>
-            <div class="carousel-dots"></div>
+            <div class="carrossel-pontos"></div>
           </div>
         </div>
       `;
@@ -244,33 +262,37 @@ function setupFormValidation() {
     let isValid = true;
 
     // Limpa erros anteriores
-    document.querySelectorAll('.form__error').forEach(el => el.textContent = '');
+    document.querySelectorAll('.form__erro').forEach(el => el.textContent = '');
 
     // Valida Nome
     const nome = document.getElementById('nome');
     if (nome.value.trim().length < 3) {
-      document.getElementById('erro-nome').textContent = 'O nome deve ter no mínimo 3 caracteres.';
+      const erroNome = document.getElementById('erro-nome');
+      if (erroNome) erroNome.textContent = 'O nome deve ter no mínimo 3 caracteres.';
       isValid = false;
     }
 
     // Valida Email
     const email = document.getElementById('email');
     if (!emailRegex.test(email.value.trim())) {
-      document.getElementById('erro-email').textContent = 'Digite um e-mail válido.';
+      const erroEmail = document.getElementById('erro-email');
+      if (erroEmail) erroEmail.textContent = 'Digite um e-mail válido.';
       isValid = false;
     }
 
     // Valida Assunto
     const assunto = document.getElementById('assunto');
     if (assunto.value.trim().length < 5) {
-      document.getElementById('erro-assunto').textContent = 'O assunto deve ter no mínimo 5 caracteres.';
+      const erroAssunto = document.getElementById('erro-assunto');
+      if (erroAssunto) erroAssunto.textContent = 'O assunto deve ter no mínimo 5 caracteres.';
       isValid = false;
     }
 
     // Valida Mensagem
     const mensagem = document.getElementById('mensagem');
     if (mensagem.value.trim().length < 5) {
-      document.getElementById('erro-mensagem').textContent = 'A mensagem não pode estar vazia.';
+      const erroMensagem = document.getElementById('erro-mensagem');
+      if (erroMensagem) erroMensagem.textContent = 'A mensagem não pode estar vazia.';
       isValid = false;
     }
 

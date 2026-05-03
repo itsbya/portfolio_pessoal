@@ -1,11 +1,11 @@
 /* 
- * CSS Variables (Custom Properties)
+ * Variáveis CSS (Propriedades Personalizadas)
  * Define as paletas de cores, tipografia, espaçamentos e transições
  */
 
 :root {
   /* =========================================
-     CORES BÁSICAS E SEMÂNTICAS (DARK MODE PADRÃO)
+     CORES BÁSICAS E SEMÂNTICAS (MODO ESCURO PADRÃO)
      ========================================= */
   --bg-primary: #09090b;
   --bg-secondary: #18181b;
@@ -79,10 +79,10 @@
 }
 
 /* =========================================
-   LIGHT MODE OVERRIDES
+   SOBREPOSIÇÕES DO MODO CLARO (LIGHT MODE)
    Adicionada classe .light-mode dinamicamente
    ========================================= */
-:root.light-mode {
+:root.modo-claro {
   --bg-primary: #f5f5f7;
   --bg-secondary: #ffffff;
   --bg-tertiary: #eaeaec;
