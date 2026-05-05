@@ -92,11 +92,12 @@ async function fetchProjectsData() {
 
     // Lista de projetos que eu quero que apareçam (Whitelist)
     const selectedProjects = [
+      'projeto_final_bloco_03.',
       'loja_games',
       'blogpessoal_react',
       '7health',
       'portfolio_pessoal',
-      'buscador-clima',
+      'projeto-clima',
       'todolist-react'
     ];
 
@@ -113,11 +114,13 @@ async function fetchProjectsData() {
 
     // Mapeamento de Imagens
     const imageMap = {
+      'projeto_final_bloco_03': 'img-farmacia-react 2026-05-05 022621.png',
       'loja_games': 'captutra-loja-geek 2026-03-13 220436.png',
       '7fit': 'img-7fit.webp',
+      'blogpessoal_react': 'img-blogpessoal.png',
       '7health': 'img-7health 2026-04-24 213511.png',
       'portfolio_pessoal': 'img-portifolio-dark 2026-05-02 154337.png',
-      'buscador-clima': 'img-skycast-dark 2026-04-10 225114.png',
+      'projeto-clima': 'img-skycast-dark 2026-04-10 225114.png',
       'todolist-react': 'img-todolist 2026-04-15 202903.png'
     };
 
