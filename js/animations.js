@@ -24,25 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // 2. Menu Mobile e Ativação de Links
-  const alternadorMenu = document.querySelector('.alternador-menu');
-  const listaNav = document.querySelector('.cabecalho__navegacao');
-  const linksNav = document.querySelectorAll('.navegacao__link');
-  
-  if (alternadorMenu && listaNav) {
-    alternadorMenu.addEventListener('click', () => {
-      alternadorMenu.classList.toggle('aberto');
-      listaNav.classList.toggle('aberto');
-    });
-    
-    // Fechar menu ao clicar em um link
-    linksNav.forEach(link => {
-      link.addEventListener('click', () => {
-        alternadorMenu.classList.remove('aberto');
-        listaNav.classList.remove('aberto');
-      });
-    });
-  }
 
   // 3. Animações On-Scroll (Intersection Observer)
   const observerOptions = {

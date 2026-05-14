@@ -1,7 +1,9 @@
-// js/main.js
+
 // Lógica principal: fetch da API do GitHub, renderização e formulário
 
-const githubUser = 'itsbya';
+const USUARIO = 'itsbya';
+const ORGANIZACAO = 'CodeSeven-Turma-JavaScript-13';
+
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -44,12 +46,12 @@ document.addEventListener('DOMContentLoaded', () => {
 // ==========================================
 async function fetchAboutData() {
   try {
-    const response = await fetch(`https://api.github.com/users/${githubUser}`);
+    const response = await fetch(`https://api.github.com/users/${USUARIO}`);
     if (!response.ok) throw new Error('Falha ao buscar dados do GitHub');
 
     const data = await response.json();
 
-    // Preencher a Imagem (usando element ID pra facilitar se quisesse, mas vamos buscar e alterar)
+    // Preencher a Imagem 
     const aboutImage = document.getElementById('sobre-imagem');
     if (aboutImage) {
       aboutImage.src = data.avatar_url;
@@ -65,7 +67,7 @@ async function fetchAboutData() {
 
     // Atualizar Link do GitHub no botão
     const githubLink = document.getElementById('botao-github');
-    if (githubLink) githubLink.href = data.html_url;
+    if (githubLink) githubLink.href = `https://github.com/${USUARIO}`;
 
   } catch (error) {
     console.error('Erro na seção Sobre:', error);
@@ -83,44 +85,80 @@ async function fetchProjectsData() {
   projectsGrid.innerHTML = '<p style="text-align:center; width:100%;">Carregando projetos brilhantes...</p>';
 
   try {
-    // Busca todos os repositórios para filtrar os escolhidos
-    const response = await fetch(`https://api.github.com/users/${githubUser}/repos?sort=updated&per_page=100`);
-    if (!response.ok) throw new Error('Falha ao buscar repositórios');
+    // Busca repositórios do usuário e da organização em paralelo
+    const [userReposRes, orgReposRes] = await Promise.allSettled([
+      fetch(`https://api.github.com/users/${USUARIO}/repos?sort=updated&per_page=100`),
+      fetch(`https://api.github.com/orgs/${ORGANIZACAO}/repos?sort=updated&per_page=100`)
+    ]);
 
-    let repos = await response.json();
+    let allRepos = [];
+
+    // Processa repositórios do usuário
+    if (userReposRes.status === 'fulfilled' && userReposRes.value.ok) {
+      const userRepos = await userReposRes.value.json();
+      allRepos = [...allRepos, ...userRepos];
+    }
+
+    // Processa repositórios da organização
+    if (orgReposRes.status === 'fulfilled' && orgReposRes.value.ok) {
+      const orgRepos = await orgReposRes.value.json();
+      allRepos = [...allRepos, ...orgRepos];
+    }
+
+    if (allRepos.length === 0) throw new Error('Nenhum repositório encontrado.');
+
+    // Remove duplicatas por nome
+    const uniqueReposMap = new Map();
+    allRepos.forEach(repo => {
+      uniqueReposMap.set(repo.name.toLowerCase(), repo);
+    });
+    
+    let repos = Array.from(uniqueReposMap.values());
+
     projectsGrid.innerHTML = ''; // Limpa o loading
 
-    // Lista de projetos que eu quero que apareçam (Whitelist)
-    const selectedProjects = [
-      'projeto_final_bloco_03.',
-      'loja_games',
+    // Whitelist de projetos permitidos (Pessoais e da Organização)
+    const projetosPermitidos = [
+      'connectelas_react',
+      'projeto_7health_react',
+      '7fit-react',
+      'farmacia_generation_react',
       'blogpessoal_react',
-      '7health',
       'portfolio_pessoal',
-      'projeto-clima',
-      'todolist-react'
+      'skycast',
+      'todolist-react',
     ];
 
     // Filtrar apenas os projetos escolhidos
-    repos = repos.filter(repo => selectedProjects.includes(repo.name.toLowerCase()));
+    repos = repos.filter(repo => projetosPermitidos.includes(repo.name.toLowerCase()));
 
-    // Agrupar repositórios por linguagem
+    // Ordenar os repositórios seguindo exatamente a ordem definida na whitelist (projetosPermitidos)
+    repos.sort((a, b) => {
+      return projetosPermitidos.indexOf(a.name.toLowerCase()) - projetosPermitidos.indexOf(b.name.toLowerCase());
+    });
+
+    // Agrupar repositórios por linguagem mantendo a ordem global definida na whitelist
     const reposByLang = {};
+    const ordemLinguagens = []; // Para garantir que as categorias sigam a ordem dos projetos
+
     repos.forEach(repo => {
       const language = repo.language || 'Outros';
-      if (!reposByLang[language]) reposByLang[language] = [];
+      if (!reposByLang[language]) {
+        reposByLang[language] = [];
+        ordemLinguagens.push(language);
+      }
       reposByLang[language].push(repo);
     });
 
     // Mapeamento de Imagens
     const imageMap = {
-      'projeto_final_bloco_03': 'img-farmacia-react 2026-05-05 022621.png',
-      'loja_games': 'captutra-loja-geek 2026-03-13 220436.png',
+      'connectelas_react': 'img-connectElas2026-05-14 012701.png',
+      'farmacia_generation_react': 'img-farmacia-react 2026-05-05 022621.png',
       '7fit': 'img-7fit.webp',
       'blogpessoal_react': 'img-blogpessoal.png',
       '7health': 'img-7health 2026-04-24 213511.png',
       'portfolio_pessoal': 'img-portifolio-dark 2026-05-02 154337.png',
-      'projeto-clima': 'img-skycast-dark 2026-04-10 225114.png',
+      'skycast': 'img-skycast-dark 2026-04-10 225114.png',
       'todolist-react': 'img-todolist 2026-04-15 202903.png'
     };
 
@@ -140,8 +178,8 @@ async function fetchProjectsData() {
       'github': 'github.svg'
     };
 
-    // Renderizar categorias e seus carrosséis
-    Object.keys(reposByLang).forEach(lang => {
+    // Renderizar categorias e seus carrosséis seguindo a ordem definida
+    ordemLinguagens.forEach(lang => {
       const langRepos = reposByLang[lang];
 
       const categoryHTML = `
@@ -215,7 +253,7 @@ async function fetchProjectsData() {
                           <a href="${repo.html_url}" target="_blank" class="card-projeto__link">Ver Código ↗</a>
                         </div>
                       </div>
-                      <h3 class="card-projeto__titulo">${repo.name.replace(/[-_]/g, ' ').toUpperCase()}</h3>
+                      <h3 class="card-projeto__titulo">${formatarNomeProjeto(repo.name)}</h3>
                       ${topicsHTML}
                       <p class="card-projeto__descricao">${desc}</p>
                     </div>
@@ -310,4 +348,41 @@ function setupFormValidation() {
       form.submit();
     }
   });
+}
+
+/**
+ * Transforma nomes técnicos de repositórios em títulos amigáveis e profissionais.
+ */
+function formatarNomeProjeto(nomeRepo) {
+  let nome = nomeRepo;
+  
+  // Lista de sufixos técnicos a remover
+  const sufixos = [
+    '_react', '_node', '_nodejs', '_js', '_javascript', 
+    '_api', '_frontend', '_backend', '_fullstack', '_final',
+    '-react', '-node', '-nodejs', '-js', '-javascript',
+    '-api', '-frontend', '-backend', '-fullstack', '-final'
+  ];
+  
+  // Remove os sufixos de forma insensível a maiúsculas
+  sufixos.forEach(sufixo => {
+    const regex = new RegExp(sufixo + '$', 'i');
+    nome = nome.replace(regex, '');
+  });
+
+  // Substitui hífens e underscores por espaços
+  nome = nome.replace(/[-_]/g, ' ');
+
+  // Se o nome resultante estiver todo em minúsculo, capitaliza cada palavra
+  if (nome === nome.toLowerCase()) {
+    return nome
+      .split(' ')
+      .filter(p => p.length > 0)
+      .map(palavra => palavra.charAt(0).toUpperCase() + palavra.slice(1))
+      .join(' ')
+      .trim();
+  }
+  
+  // Caso contrário, apenas remove espaços extras e mantém o casing original (ex: connectElas)
+  return nome.trim();
 }

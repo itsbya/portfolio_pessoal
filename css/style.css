@@ -598,7 +598,7 @@ h1, h2, h3 {
   z-index: 1001;
 }
 
-.menu-toggle span {
+.alternador-menu span {
   display: block;
   width: 25px;
   height: 2px;
@@ -619,10 +619,12 @@ h1, h2, h3 {
     height: 100vh;
     background: var(--bg-secondary);
     border-left: 1px solid var(--border-color);
+    display: flex; /* Garante que o flex esteja ativo no mobile */
     flex-direction: column;
     justify-content: center;
     transition: right 0.3s ease;
     padding: var(--space-2xl);
+    z-index: 1000; /* Garante que fique acima de outros conteúdos */
   }
   
   .cabecalho__navegacao.aberto {
